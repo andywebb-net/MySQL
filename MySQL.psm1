@@ -1353,13 +1353,13 @@ function Invoke-MySqlParamQuery
 		[ValidateNotNullOrEmpty()]
 		[MySql.Data.MySqlClient.MySqlConnection]$Connection = $MySQLConnection,
 
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string[]]$Parameters,
+        	[Parameter(Mandatory)]
+        	[ValidateNotNullOrEmpty()]
+        	[string[]]$Parameters,
 
-        [Parameter(Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string[]]$Values
+        	[Parameter(Mandatory)]
+        	[ValidateNotNullOrEmpty()]
+        	[string[]]$Values
 	)
 	begin
 	{
@@ -1371,12 +1371,12 @@ function Invoke-MySqlParamQuery
 		{
 			
 			[MySql.Data.MySqlClient.MySqlCommand]$command = New-Object MySql.Data.MySqlClient.MySqlCommand
-            $command.Connection = $Connection
+            		$command.Connection = $Connection
 			$command.CommandText = $Query
-            $command.Prepare()
-            for($i = 0; $i -lt $parameters.Count; $i++){
-                $tmp = $command.Parameters.AddWithValue($Parameters[$i], $values[$i])
-            }
+            		for($i = 0; $i -lt $parameters.Count; $i++){
+                		$tmp = $command.Parameters.AddWithValue($Parameters[$i], $values[$i])
+            		}
+           		$command.Prepare()
 			[MySql.Data.MySqlClient.MySqlDataAdapter]$dataAdapter = New-Object MySql.Data.MySqlClient.MySqlDataAdapter($command)
 			$dataSet = New-Object System.Data.DataSet
 			$recordCount = $dataAdapter.Fill($dataSet)
